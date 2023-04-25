@@ -25,11 +25,13 @@ const App = () => {
 
   useEffect(() => {
     console.log(coordinates, bounds);
-    getPlacesData().then((data) => {
-      console.log(data);
+    if (bounds) {
+      getPlacesData(bounds.sw, bounds.ne).then((data) => {
+        console.log(data);
 
-      setPlaces(data);
-    });
+        setPlaces(data);
+      });
+    }
   }, [coordinates, bounds]);
 
   return (
