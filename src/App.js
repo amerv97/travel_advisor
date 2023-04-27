@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CssBaseline, Grid } from "@material-ui/core";
 
 import { getPlacesData } from "./api";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
 import Map from "./components/Map/Map";
-import PlaceDetails from "./components/PlaceDetails/PlaceDetails";
-import { useEffect } from "react";
-import { useState } from "react";
 
 const App = () => {
   const [places, setPlaces] = useState([]);
@@ -31,7 +28,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const filteredPlaces = places && places.filter((place) => place.rating > rating);
+    const filteredPlaces =
+      places && places.filter((place) => place.rating > rating);
     setFilteredPlaces(filteredPlaces);
   }, [rating]);
 
@@ -49,7 +47,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
-      <Header />
+      <Header setCoordinates={setCoordinates} />
       <Grid container spacing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={4}>
           <List
